@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Spring Boot Lambda - JVM Runtime (Java 21)
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+
+Resources:
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
+      Runtime: java25
+      CodeUri: build/libs/spring-aws-lambda-0.0.1-SNAPSHOT-aws.jar
+      Architectures:
+        - arm64
+      Environment:
+        Variables:
+          MAIN_CLASS: org.local.springawslambda.SpringAwsLambdaApplication
+          SPRING_CLOUD_FUNCTION_DEFINITION: hello
+

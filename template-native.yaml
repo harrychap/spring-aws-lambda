@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Spring Boot Lambda - Native Runtime (provided.al2023)
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: hello
+      Runtime: provided.al2023
+      CodeUri: .
+      Architectures:
+        - arm64
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: hello
+    Metadata:
+      BuildMethod: makefile
