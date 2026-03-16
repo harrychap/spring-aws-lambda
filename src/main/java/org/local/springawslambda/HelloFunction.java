@@ -11,11 +11,13 @@ public class HelloFunction {
     @Bean
     public Function<String, String> hello() {
         return input -> {
+            long start = System.currentTimeMillis();
             long result = 0;
             for (int i = 0; i < 1_000_000_000; i++) {
                 result += new Vector(i, i + 1, i + 2).dot(new Vector(i + 3, i + 4, i + 5));
             }
-            return String.format("result=%d (input: %s)", result, input);
+            long elapsed = System.currentTimeMillis() - start;
+            return String.format("Hello, %s! Computation finished in %dms (checksum: %d)", input, elapsed, result);
         };
     }
 

@@ -2,10 +2,12 @@
 
 A simple AWS Lambda function built with Spring Boot and Spring Cloud Function, with support for both JVM (Java 25) and native (`provided.al2023`) runtimes via GraalVM.
 
-The function accepts a name string and returns a greeting:
+The function accepts a name string, runs a compute-heavy benchmark (1 billion vector dot products), and returns a greeting with the elapsed time and a checksum:
 ```
-"World" → "Hello, World!"
+"World" → "Hello, World! Computation finished in 1234ms (checksum: -8446744040951443456)"
 ```
+
+The elapsed time in the response makes it easy to compare JVM vs native performance — native typically completes the computation significantly faster.
 
 ## Prerequisites
 
